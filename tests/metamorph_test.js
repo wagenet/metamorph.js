@@ -13,6 +13,12 @@ test("it should return a string of HTML containing the string when outerHTML is 
   ok($("#qunit-fixture").text().match(/^.*one two three\s*$/), "Contains exactly the text injected");
 });
 
+// This is a test for IE, but can be run in any browser
+test("it should not include &amp;shy; in outerHTML", function() {
+  var morph = Metamorph("one two three");
+  ok(!morph.outerHTML().match(/&shy;/), "Doesn't contain &amp;shy;");
+});
+
 test("it should allow HTML to be updated after injected into the DOM", function() {
   var morph = Metamorph("one two three");
   $("#qunit-fixture").html(morph.outerHTML());
